@@ -1,7 +1,7 @@
 package com.entraId.oicd.Oicd_EntraId.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,12 +12,12 @@ public class TestController {
 
     @GetMapping("/public")
     public String publicEndpoint() {
-        return "Hello public";
+        return "This is a public page.";
     }
 
     @GetMapping("/protected")
-    public String protectedEndpoint(@AuthenticationPrincipal Jwt jwt) {
-        return "Hello " + jwt.getClaimAsString("name");
+    public String protectedEndpoint(@AuthenticationPrincipal OidcUser user) {
+        return "This is a protected page. Hello " + user.getFullName();
     }
 }
 

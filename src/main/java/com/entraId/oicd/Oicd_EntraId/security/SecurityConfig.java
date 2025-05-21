@@ -19,9 +19,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/public").permitAll()
                         .anyRequest().authenticated()
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(withDefaults())
-                );
+                .oauth2Login(withDefaults());
 
         return http.build();
     }
